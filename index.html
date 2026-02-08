@@ -13,7 +13,11 @@
     radial-gradient(circle at bottom right, #f4f8ff 0%, transparent 40%),
     linear-gradient(180deg, #fffafc 0%, #f7f5ff 100%);
 }
-    .wrap{max-width:980px;margin:0 auto;padding:18px;padding-top:48px;}
+    .wrap{max-width:980px;margin:0 auto;padding:18px;min-height:100svh;          /* ← 画面の高さを使う */
+  display:flex;
+  align-items:center;         /* ← 縦方向の中央寄せ */
+  justify-content:center;
+}}
     .hint{margin:0 0 10px;color:#6b5b57;font-weight:800;letter-spacing:.02em}
     .stage{
   position:relative;
