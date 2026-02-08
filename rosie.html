@@ -4,17 +4,134 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ロージー</title>
+
   <style>
-    body{margin:0;font-family:system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;background:#fff;}
-    .wrap{max-width:980px;margin:0 auto;padding:18px;}
-    .img{width:100%;border-radius:18px;display:block;}
-    .back{display:inline-block;margin:12px 0 0;color:#6b5b57;text-decoration:none;font-weight:700;}
+    /* ===== パステル背景 ===== */
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;
+      background:
+        radial-gradient(circle at top left,
+          rgba(255,220,235,.95) 0%,
+          rgba(255,220,235,.55) 35%,
+          transparent 62%
+        ),
+        radial-gradient(circle at bottom right,
+          rgba(210,220,255,.95) 0%,
+          rgba(210,220,255,.55) 35%,
+          transparent 62%
+        ),
+        linear-gradient(
+          180deg,
+          #ffeaf3 0%,
+          #efe7ff 55%,
+          #e9f2ff 100%
+        );
+    }
+
+    /* ===== 画像を中央に ===== */
+    .wrap{
+      min-height:100svh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      box-sizing:border-box;
+    }
+
+    .card{
+      max-width:980px;
+      width:100%;
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 12px 30px rgba(180,160,200,.25);
+      background:#fff;
+    }
+
+    .img{
+      width:100%;
+      display:block;
+    }
+
+    .back{
+      margin-top:14px;
+      color:#6b5b57;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    /* ===== ランダムハート ===== */
+    .heart{
+      position:fixed;
+      width:32px;
+      height:32px;
+      pointer-events:none;
+      opacity:0;
+      transform:translate(-50%,-50%);
+      animation: heartPop 1.6s ease-out forwards;
+      filter:
+        drop-shadow(0 0 6px rgba(255,180,200,.95))
+        drop-shadow(0 0 18px rgba(255,140,180,.7));
+      z-index:5;
+    }
+
+    @keyframes heartPop{
+      0%   {opacity:0; transform:translate(-50%,-50%) scale(.45);}
+      20%  {opacity:1;}
+      100% {opacity:0; transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.35);}
+    }
   </style>
 </head>
+
 <body>
   <div class="wrap">
-    <img class="img" src="03_rosie.png" alt="ロージー" />
+    <div class="card">
+      <img class="img" src="03_rosie.png" alt="ロージー">
+    </div>
+
     <a class="back" href="index.html">← もどる</a>
   </div>
+
+  <script>
+    /* ===== ランダムハート（中心付近から） ===== */
+    function startAutoHeart(){
+      const min = 1600;
+      const max = 3000;
+
+      function spawn(){
+        const h = document.createElement('div');
+        h.className = 'heart';
+
+        // 画面中央付近からランダム
+        const ox = (Math.random() * 240 - 120);
+        const oy = (Math.random() * 200 - 100);
+        h.style.left = `calc(50vw + ${ox}px)`;
+        h.style.top  = `calc(50vh + ${oy}px)`;
+
+        // 消える方向をランダムに
+        h.style.setProperty('--dx', (Math.random()*140 - 70) + 'px');
+        h.style.setProperty('--dy', (-(Math.random()*90 + 120)) + 'px');
+
+        h.innerHTML = `
+          <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true">
+            <path fill="rgba(255,170,200,1)"
+              d="M12 21s-6.7-4.6-9.5-8.2C.6 10.4 1.1 6.9 4.1 5.4
+                 6.1 4.4 8.4 5.2 9.6 7c1.2-1.8 3.5-2.6 5.5-1.6
+                 3 1.5 3.5 5 1.6 7.4C18.7 16.4 12 21 12 21z"/>
+          </svg>
+        `;
+
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(), 1700);
+
+        setTimeout(spawn, Math.random()*(max-min)+min);
+      }
+
+      setTimeout(spawn, 1200);
+    }
+
+    startAutoHeart();
+  </script>
 </body>
 </html>
