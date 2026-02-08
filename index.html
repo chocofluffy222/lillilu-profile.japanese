@@ -36,38 +36,11 @@ body::before{
     radial-gradient(circle at 70% 80%, rgba(255,255,255,.25), transparent 45%);
   pointer-events:none;
 }
-    /* ゆっくり動く光レイヤー */
-body::after{
-  content:"";
-  position:fixed;
-  inset:-10%;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(255,255,255,.45), transparent 45%),
-    radial-gradient(circle at 80% 70%, rgba(255,255,255,.35), transparent 50%),
-    radial-gradient(circle at 60% 20%, rgba(255,255,255,.25), transparent 55%);
-  animation: floatLight 22s ease-in-out infinite alternate;
-  pointer-events:none;
-  z-index:0;
-}
-
-@keyframes floatLight{
-  0%{
-    transform:translate(0,0);
-  }
-  100%{
-    transform:translate(-4%, -6%);
-  }
-}
     .wrap{max-width:980px;margin:0 auto;padding:18px;min-height:100svh;          /* ← 画面の高さを使う */
   display:flex;
   align-items:center;         /* ← 縦方向の中央寄せ */
   justify-content:center;
 }}
-    .wrap{
-  position:relative;
-  z-index:1;
-}
-
     .hint{margin:0 0 10px;color:#6b5b57;font-weight:800;letter-spacing:.02em}
     .stage{
   position:relative;
