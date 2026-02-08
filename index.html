@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>リルリルと仲間たち</title>
+  <style>
+    body{margin:0;font-family:system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;background:#fff;}
+    .wrap{max-width:980px;margin:0 auto;padding:18px;}
+    .cover{width:100%;border-radius:18px;display:block;}
+    .hint{margin:14px 0 10px;text-align:center;color:#6b5b57;font-weight:600;}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+    @media (max-width:700px){.grid{grid-template-columns:repeat(3,1fr);}}
+    @media (max-width:420px){.grid{grid-template-columns:repeat(2,1fr);}}
+    .face{display:block;border-radius:18px;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.08);background:#fff;}
+    .face img{width:100%;height:100%;aspect-ratio:1/1;object-fit:cover;display:block;}
+    .label{padding:8px 10px;text-align:center;font-weight:700;color:#6b5b57;background:rgba(255,255,255,.85);}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- 表紙 -->
+    <img class="cover" src="01_cover.png" alt="リルリルと仲間たち" />
+
+    <div class="hint">気になる子の顔をタップしてね</div>
+
+    <!-- 顔タップ一覧（顔アイコン画像を後で差し替えOK） -->
+    <div class="grid">
+      <a class="face" href="lillilu.html"><img src="face_lillilu.png" alt="リルリル"><div class="label">リルリル</div></a>
+      <a class="face" href="rosie.html"><img src="face_rosie.png" alt="ロージー"><div class="label">ロージー</div></a>
+      <a class="face" href="finn.html"><img src="face_finn.png" alt="フィン"><div class="label">フィン</div></a>
+      <a class="face" href="bonbon.html"><img src="face_bonbon.png" alt="ボンボン"><div class="label">ボンボン</div></a>
+      <a class="face" href="espie.html"><img src="face_espie.png" alt="エスピー"><div class="label">エスピー</div></a>
+      <a class="face" href="gigi.html"><img src="face_gigi.png" alt="ジジ"><div class="label">ジジ</div></a>
+      <a class="face" href="levy.html"><img src="face_levy.png" alt="レヴィ"><div class="label">レヴィ</div></a>
+    </div>
+  </div>
+</body>
+</html>
