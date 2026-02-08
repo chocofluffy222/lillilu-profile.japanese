@@ -21,6 +21,7 @@
           transparent 62%
         ),
         linear-gradient(180deg,#ffeaf3 0%,#efe7ff 55%,#e9f2ff 100%);
+      padding-bottom:60px; /* ← iPhone対策 */
     }
 
     body::before{
@@ -52,191 +53,35 @@
       background:rgba(255,255,255,0);
       -webkit-tap-highlight-color: transparent;
     }
-    .hotspot:focus{outline:3px solid rgba(255,170,200,.7); outline-offset:2px;}
-    .debug .hotspot{background:rgba(255,0,0,.18); outline:2px solid rgba(255,0,0,.35);}
 
-    /* タップ時キラッ */
-    .spark{
-      position:fixed;
-      width:22px; height:22px;
-      pointer-events:none;
-      transform:translate(-50%,-50%) scale(.6) rotate(0deg);
-      opacity:0;
-      animation:spark .55s ease-out forwards;
-      filter: drop-shadow(0 2px 6px rgba(255, 214, 120, .7));
-      z-index:10;
-    }
-    @keyframes spark{
-      0%   {opacity:0; transform:translate(-50%,-50%) scale(.3) rotate(0deg);}
-      20%  {opacity:1; transform:translate(-50%,-50%) scale(1) rotate(20deg);}
-      100% {opacity:0; transform:translate(-50%,-50%) scale(1.4) rotate(70deg);}
-    }
-
-    /* ランダムきらきら（通常時） */
-    .twinkle{
-      position:fixed;
-      width:14px;height:14px;
-      pointer-events:none;
-      opacity:0;
-      animation: twinkle 0.75s ease-out forwards;
-      filter: drop-shadow(0 0 9px rgba(255,215,150,.6));
-      z-index:8;
-    }
-    @keyframes twinkle{
-      0%{opacity:0; transform:translate(-50%,-50%) scale(.55) rotate(0deg);}
-      25%{opacity:1;}
-      100%{opacity:0; transform:translate(-50%,-50%) scale(1.2) rotate(40deg);}
-    }
-
-    /* ❤︎ 自動ハート（中心付近からランダムに出て消える） */
-    .heart{
-      position:fixed;
-      width:32px;
-      height:32px;
-      pointer-events:none;
-      opacity:0;
-      transform:translate(-50%,-50%);
-      animation: heartPop 1.6s ease-out forwards;
-      filter:
-        drop-shadow(0 0 6px rgba(255,180,200,.95))
-        drop-shadow(0 0 18px rgba(255,140,180,.7));
-      z-index:9;
-    }
-
-    @keyframes heartPop{
-      0%   {opacity:0; transform:translate(-50%,-50%) scale(.45);}
-      18%  {opacity:1; transform:translate(-50%,-55%) scale(1.05);}
-      100% {opacity:0; transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.35);}
+    /* コピーライト */
+    .copyright{
+      text-align:center;
+      margin:18px 0 12px;
+      font-size:12px;
+      letter-spacing:.08em;
+      color:rgba(120,100,110,.6);
     }
   </style>
 </head>
 
 <body>
-  <div class="stage" id="root">
-    <!-- 入口画像（あなたのリポジトリのファイル名に合わせて） -->
+  <div class="stage">
     <img class="img" src="01_cover.png" alt="気になる子の顔をタップして" />
 
-    <a class="hotspot" href="lillilu.html" aria-label="リルリル"
-       style="left:41%; top:57%; width:18%; height:18%;"></a>
-
-    <a class="hotspot" href="espie.html" aria-label="エスピー"
-       style="left:18%; top:35%; width:22%; height:22%;"></a>
-
-    <a class="hotspot" href="gigi.html" aria-label="ジジ"
-       style="left:58%; top:18%; width:22%; height:22%;"></a>
-
-    <a class="hotspot" href="bonbon.html" aria-label="ボンボン"
-       style="left:64%; top:40%; width:18%; height:18%;"></a>
-
-    <a class="hotspot" href="rosie.html" aria-label="ロージー"
-       style="left:12%; top:55%; width:18%; height:18%;"></a>
-
-    <a class="hotspot" href="finn.html" aria-label="フィン"
-       style="left:56%; top:64%; width:16%; height:16%;"></a>
-
-    <a class="hotspot" href="levy.html" aria-label="レヴィ"
-       style="left:70%; top:56%; width:16%; height:16%;"></a>
+    <a class="hotspot" href="lillilu.html" style="left:41%; top:57%; width:18%; height:18%;"></a>
+    <a class="hotspot" href="espie.html"   style="left:18%; top:35%; width:22%; height:22%;"></a>
+    <a class="hotspot" href="gigi.html"    style="left:58%; top:18%; width:22%; height:22%;"></a>
+    <a class="hotspot" href="bonbon.html"  style="left:64%; top:40%; width:18%; height:18%;"></a>
+    <a class="hotspot" href="rosie.html"   style="left:12%; top:55%; width:18%; height:18%;"></a>
+    <a class="hotspot" href="finn.html"    style="left:56%; top:64%; width:16%; height:16%;"></a>
+    <a class="hotspot" href="levy.html"    style="left:70%; top:56%; width:16%; height:16%;"></a>
   </div>
 
-  <script>
-    // debug：URLの最後に ?debug=1 を付けると赤枠表示
-    const params = new URLSearchParams(location.search);
-    if (params.get('debug') === '1') document.getElementById('root').classList.add('debug');
+  <!-- ★ コピーライトここ -->
+  <footer class="copyright">
+    © 2026 chocofluffy
+  </footer>
 
-    // タップした場所にキラッ✨
-    function bindTapSpark(selector){
-      document.querySelectorAll(selector).forEach(a=>{
-        a.addEventListener('click', (e)=>{
-          const rect = a.getBoundingClientRect();
-          const x = (e.clientX || (rect.left + rect.width/2));
-          const y = (e.clientY || (rect.top  + rect.height/2));
-
-          const s = document.createElement('div');
-          s.className = 'spark';
-          s.style.left = x + 'px';
-          s.style.top  = y + 'px';
-          s.innerHTML = `
-            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-              <path fill="rgba(255,210,120,.95)"
-                d="M12 0l2.2 7.2L21.5 9l-7.3 2.1L12 18l-2.2-6.9L2.5 9l7.3-1.8L12 0z"/>
-            </svg>`;
-          document.body.appendChild(s);
-          setTimeout(()=>s.remove(), 650);
-        }, {passive:true});
-      });
-    }
-
-    // ❤︎ 自動ハート：中心付近（50vw/55vh）から “ランダムに少しズレた位置” で出て消える
-    function startAutoHeart(){
-      const min = 1400;   // 出現間隔（最短）
-      const max = 2600;   // 出現間隔（最長）
-
-      function spawnHeart(){
-        const h = document.createElement('div');
-        h.className = 'heart';
-
-        // 出現位置：中心付近からランダム（±120px）
-        const ox = (Math.random() * 240 - 120);
-        const oy = (Math.random() * 200 - 100);
-        h.style.left = `calc(50vw + ${ox}px)`;
-        h.style.top  = `calc(55vh + ${oy}px)`;
-
-        // 消え方：少し上に＆左右にランダム
-        const dx = (Math.random() * 140 - 70) + "px";              // 左右
-        const dy = (-(Math.random() * 90 + 120)) + "px";           // 上方向
-        h.style.setProperty('--dx', dx);
-        h.style.setProperty('--dy', dy);
-
-        h.innerHTML = `
-          <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true">
-            <path fill="rgba(255,170,200,1)"
-              d="M12 21s-6.7-4.6-9.5-8.2C.6 10.4 1.1 6.9 4.1 5.4
-                 6.1 4.4 8.4 5.2 9.6 7c1.2-1.8 3.5-2.6 5.5-1.6
-                 3 1.5 3.5 5 1.6 7.4C18.7 16.4 12 21 12 21z"/>
-          </svg>`;
-        document.body.appendChild(h);
-        setTimeout(()=>h.remove(), 1700);
-
-        const next = Math.random() * (max - min) + min;
-        setTimeout(spawnHeart, next);
-      }
-
-      setTimeout(spawnHeart, 900);
-    }
-
-    // 通常時きらきら（ランダム）
-    function startTwinkle(){
-      const min = 3000;
-      const max = 6000;
-
-      function spawnTwinkle(){
-        const t = document.createElement('div');
-        t.className = 'twinkle';
-
-        const x = Math.random() * 84 + 8;
-        const y = Math.random() * 70 + 10;
-        t.style.left = x + 'vw';
-        t.style.top  = y + 'vh';
-
-        t.innerHTML = `
-          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
-            <path fill="rgba(255,215,150,.95)"
-              d="M12 0l2.2 7.2L21.5 9l-7.3 2.1L12 18l-2.2-6.9L2.5 9l7.3-1.8L12 0z"/>
-          </svg>`;
-        document.body.appendChild(t);
-        setTimeout(()=>t.remove(), 800);
-
-        const next = Math.random() * (max - min) + min;
-        setTimeout(spawnTwinkle, next);
-      }
-
-      setTimeout(spawnTwinkle, 1800);
-    }
-
-    // 起動（scriptがbody末尾なので直実行が一番安定）
-    bindTapSpark('.hotspot');
-    startAutoHeart();
-    startTwinkle();
-  </script>
 </body>
 </html>
