@@ -19,15 +19,39 @@
     .hotspot:focus{outline:3px solid rgba(255,170,200,.7); outline-offset:2px;}
     /* デバッグ用：位置合わせしたい時だけ ?debug=1 をURLの最後につける */
     .debug .hotspot{background:rgba(255,0,0,.18); outline:2px solid rgba(255,0,0,.35);}
+  .profile-text{
+  font-family: "Yomogi", cursive;
+  font-size: 26px;
+  letter-spacing: .08em;
+  text-align: center;
+
+  background: linear-gradient(
+    135deg,
+    #f7e7a1 0%,
+    #e6c86e 30%,
+    #d4af37 50%,
+    #f3e5ab 70%,
+    #c9a43a 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow:
+    0 1px 1px rgba(255,255,255,.6),
+    0 2px 4px rgba(180,140,40,.25);
+
+  margin: 10px 0 6px;
+}
   </style>
+<link href="https://fonts.googleapis.com/css2?family=Yomogi&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="wrap" id="root">
-    <p class="hint">気になる子の顔をタップで、プロフィールへ♡</p>
+    <p class="hint">気になる子の顔をタップして、プロフィールへGO♡</p>
 
     <div class="stage">
       <!-- 入口画像（あなたのリポジトリにあるファイル名に合わせてる） -->
-      <img class="img" src="01_cover.png.PNG" alt="自己紹介（顔をタップ）" />
+      <img class="img" src="01_cover.png" alt="自己紹介（顔をタップ）" />
 
       <!-- ここから“顔タップ”の透明リンク（位置はだいたい。微調整は後でOK） -->
       <a class="hotspot" href="lillilu.html" aria-label="リルリル"
