@@ -57,7 +57,7 @@
 
     /* タップ時キラッ */
     .spark{
-      position:fixed; /* ← iPhoneでも確実に見せる */
+      position:fixed;
       width:22px; height:22px;
       pointer-events:none;
       transform:translate(-50%,-50%) scale(.6) rotate(0deg);
@@ -70,25 +70,6 @@
       0%   {opacity:0; transform:translate(-50%,-50%) scale(.3) rotate(0deg);}
       20%  {opacity:1; transform:translate(-50%,-50%) scale(1) rotate(20deg);}
       100% {opacity:0; transform:translate(-50%,-50%) scale(1.4) rotate(70deg);}
-    }
-
-    /* 自動ハート（通常時） */
-    .heart{
-      position:fixed;
-      width:32px;
-      height:32px;
-      pointer-events:none;
-      opacity:0;
-      animation: heartFloat 3.0s ease-out forwards;
-      filter:
-        drop-shadow(0 0 6px rgba(255,180,200,.95))
-        drop-shadow(0 0 18px rgba(255,140,180,.7));
-      z-index:9;
-    }
-    @keyframes heartFloat{
-      0%{opacity:0; transform:translate(-50%,-50%) scale(.4);}
-      20%{opacity:1;}
-      100%{opacity:0; transform:translate(-50%,-90%) scale(1.4);}
     }
 
     /* ランダムきらきら（通常時） */
@@ -106,12 +87,33 @@
       25%{opacity:1;}
       100%{opacity:0; transform:translate(-50%,-50%) scale(1.2) rotate(40deg);}
     }
+
+    /* ❤︎ 自動ハート（中心付近からランダムに出て消える） */
+    .heart{
+      position:fixed;
+      width:32px;
+      height:32px;
+      pointer-events:none;
+      opacity:0;
+      transform:translate(-50%,-50%);
+      animation: heartPop 1.6s ease-out forwards;
+      filter:
+        drop-shadow(0 0 6px rgba(255,180,200,.95))
+        drop-shadow(0 0 18px rgba(255,140,180,.7));
+      z-index:9;
+    }
+
+    @keyframes heartPop{
+      0%   {opacity:0; transform:translate(-50%,-50%) scale(.45);}
+      18%  {opacity:1; transform:translate(-50%,-55%) scale(1.05);}
+      100% {opacity:0; transform:translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.35);}
+    }
   </style>
 </head>
 
 <body>
   <div class="stage" id="root">
-    <!-- ★ ここを新しい画像ファイル名に変えてね -->
+    <!-- 入口画像（あなたのリポジトリのファイル名に合わせて） -->
     <img class="img" src="01_cover.png" alt="気になる子の顔をタップして" />
 
     <a class="hotspot" href="lillilu.html" aria-label="リルリル"
@@ -141,7 +143,7 @@
     const params = new URLSearchParams(location.search);
     if (params.get('debug') === '1') document.getElementById('root').classList.add('debug');
 
-    // タップした場所にキラッ✨（クリック位置が取れない時は中心に出す）
+    // タップした場所にキラッ✨
     function bindTapSpark(selector){
       document.querySelectorAll(selector).forEach(a=>{
         a.addEventListener('click', (e)=>{
@@ -164,19 +166,26 @@
       });
     }
 
-    // ★ 自動ハート（通常時）
-    // まず「動いてるか確認」用に 1秒固定にしてる（OKなら後で 3500〜6500 に戻して）
+    // ❤︎ 自動ハート：中心付近（50vw/55vh）から “ランダムに少しズレた位置” で出て消える
     function startAutoHeart(){
-      const min = 1000;  // ←テスト用（OKなら 3500）
-      const max = 1000;  // ←テスト用（OKなら 6500）
+      const min = 1400;   // 出現間隔（最短）
+      const max = 2600;   // 出現間隔（最長）
 
       function spawnHeart(){
         const h = document.createElement('div');
         h.className = 'heart';
 
-        const x = Math.random() * 84 + 8; // 8〜92vw
-        h.style.left = '50vh';
-        h.style.top  = '55vh'; // 
+        // 出現位置：中心付近からランダム（±120px）
+        const ox = (Math.random() * 240 - 120);
+        const oy = (Math.random() * 200 - 100);
+        h.style.left = `calc(50vw + ${ox}px)`;
+        h.style.top  = `calc(55vh + ${oy}px)`;
+
+        // 消え方：少し上に＆左右にランダム
+        const dx = (Math.random() * 140 - 70) + "px";              // 左右
+        const dy = (-(Math.random() * 90 + 120)) + "px";           // 上方向
+        h.style.setProperty('--dx', dx);
+        h.style.setProperty('--dy', dy);
 
         h.innerHTML = `
           <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true">
@@ -192,7 +201,7 @@
         setTimeout(spawnHeart, next);
       }
 
-      setTimeout(spawnHeart, 600);
+      setTimeout(spawnHeart, 900);
     }
 
     // 通常時きらきら（ランダム）
@@ -224,7 +233,7 @@
       setTimeout(spawnTwinkle, 1800);
     }
 
-    // ★ここがポイント：DOMContentLoadedを使わず、確実に直実行
+    // 起動（scriptがbody末尾なので直実行が一番安定）
     bindTapSpark('.hotspot');
     startAutoHeart();
     startTwinkle();
