@@ -5,232 +5,233 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>リルリルと仲間たち｜自己紹介</title>
   <style>
-  body{
-  margin:0;
-  font-family:system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;
+      background:
+        radial-gradient(circle at top left,
+          rgba(255, 220, 235, 0.9) 0%,
+          rgba(255, 220, 235, 0.4) 35%,
+          transparent 60%
+        ),
+        radial-gradient(circle at bottom right,
+          rgba(210, 220, 255, 0.9) 0%,
+          rgba(210, 220, 255, 0.4) 35%,
+          transparent 60%
+        ),
+        linear-gradient(
+          180deg,
+          #fff0f6 0%,
+          #f1ecff 55%,
+          #eef4ff 100%
+        );
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,.35), transparent 40%),
+        radial-gradient(circle at 70% 80%, rgba(255,255,255,.25), transparent 45%);
+      pointer-events:none;
+      z-index:0;
+    }
 
-  background:
-    radial-gradient(circle at top left,
-      rgba(255, 220, 235, 0.9) 0%,
-      rgba(255, 220, 235, 0.4) 35%,
-      transparent 60%
-    ),
-    radial-gradient(circle at bottom right,
-      rgba(210, 220, 255, 0.9) 0%,
-      rgba(210, 220, 255, 0.4) 35%,
-      transparent 60%
-    ),
-    linear-gradient(
-      180deg,
-      #fff0f6 0%,
-      #f1ecff 55%,
-      #eef4ff 100%
-    );
-}
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 30% 20%, rgba(255,255,255,.35), transparent 40%),
-    radial-gradient(circle at 70% 80%, rgba(255,255,255,.25), transparent 45%);
-  pointer-events:none;
-}
-    .wrap{max-width:980px;margin:0 auto;padding:18px;min-height:100svh;          /* ← 画面の高さを使う */
-  display:flex;
-  align-items:center;         /* ← 縦方向の中央寄せ */
-  justify-content:center;
-}}
-    .hint{margin:0 0 10px;color:#6b5b57;font-weight:800;letter-spacing:.02em}
+    /* wrap は今使ってないので一旦消してOK（残すなら波括弧の余分な } を削除） */
+    /* .wrap{...}} ← ここが余分な } でCSS壊れる原因にもなる */
+
     .stage{
-  position:relative;
-  border-radius:18px;
-  overflow:hidden;
-  margin-top: 10vh;
-  box-shadow:0 12px 30px rgba(180,160,200,.25); /* 追加 */
-}
+      position:relative;
+      border-radius:18px;
+      overflow:hidden;
+      margin:10vh auto 0;
+      max-width:980px;
+      box-shadow:0 12px 30px rgba(180,160,200,.25);
+      z-index:1;
+    }
     .img{width:100%;display:block;}
+
     .hotspot{
-      position:absolute; border-radius:999px;
-      /* 透明のタップ領域 */
+      position:absolute;
+      border-radius:999px;
       background:rgba(255,255,255,0);
       -webkit-tap-highlight-color: transparent;
     }
     .hotspot:focus{outline:3px solid rgba(255,170,200,.7); outline-offset:2px;}
-    /* デバッグ用：位置合わせしたい時だけ ?debug=1 をURLの最後につける */
     .debug .hotspot{background:rgba(255,0,0,.18); outline:2px solid rgba(255,0,0,.35);}
-  /* タップ時キラッ演出 */
-  .spark{
-    position:absolute;
-    width:22px; height:22px;
-    pointer-events:none;
-    transform:translate(-50%,-50%) scale(.6) rotate(0deg);
-    opacity:0;
-    animation:spark .55s ease-out forwards;
-    filter: drop-shadow(0 2px 6px rgba(255, 214, 120, .7));
-  }
-  @keyframes spark{
-    0%   {opacity:0; transform:translate(-50%,-50%) scale(.3) rotate(0deg);}
-    20%  {opacity:1; transform:translate(-50%,-50%) scale(1) rotate(20deg);}
-    100% {opacity:0; transform:translate(-50%,-50%) scale(1.4) rotate(70deg);}
-  }
+
+    /* タップ時キラッ */
+    .spark{
+      position:absolute;
+      width:22px; height:22px;
+      pointer-events:none;
+      transform:translate(-50%,-50%) scale(.6) rotate(0deg);
+      opacity:0;
+      animation:spark .55s ease-out forwards;
+      filter: drop-shadow(0 2px 6px rgba(255, 214, 120, .7));
+      z-index:6;
+    }
+    @keyframes spark{
+      0%   {opacity:0; transform:translate(-50%,-50%) scale(.3) rotate(0deg);}
+      20%  {opacity:1; transform:translate(-50%,-50%) scale(1) rotate(20deg);}
+      100% {opacity:0; transform:translate(-50%,-50%) scale(1.4) rotate(70deg);}
+    }
+
     /* 自動ハート */
-.heart{
-  position:fixed;
-  width:18px;
-  height:18px;
-  pointer-events:none;
-  opacity:0;
-  animation: heartFloat 1.4s ease-out forwards;
-  filter:
-    drop-shadow(0 0 4px rgba(255,180,200,.9))
-    drop-shadow(0 0 12px rgba(255,140,180,.6));
-  z-index:0;
-}
+    .heart{
+      position:fixed;
+      width:18px;
+      height:18px;
+      pointer-events:none;
+      opacity:0;
+      animation: heartFloat 1.4s ease-out forwards;
+      filter:
+        drop-shadow(0 0 4px rgba(255,180,200,.9))
+        drop-shadow(0 0 12px rgba(255,140,180,.6));
+      z-index:5; /* ←見えるように */
+    }
+    @keyframes heartFloat{
+      0%{opacity:0; transform:scale(.4) translateY(0);}
+      20%{opacity:1;}
+      100%{opacity:0; transform:scale(1.3) translateY(-60px);}
+    }
 
-@keyframes heartFloat{
-  0%{
-    opacity:0;
-    transform:scale(.4) translateY(0);
-  }
-  20%{
-    opacity:1;
-  }
-  100%{
-    opacity:0;
-    transform:scale(1.3) translateY(-60px);
-  }
-}
-    // ===== 自動でハートが出る（通常時） =====
-function startAutoHeart(){
-  const min = 7000;  // 7秒
-  const max = 12000; // 12秒
-
-  function spawnHeart(){
-    const h = document.createElement('div');
-    h.className = 'heart';
-
-    // 画面下寄りからランダム
-    const x = Math.random() * 80 + 10; // 10〜90vw
-    const y = Math.random() * 20 + 65; // 下の方
-
-    h.style.left = x + 'vw';
-    h.style.top  = y + 'vh';
-
-    h.innerHTML = `
-    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-      <path fill="rgba(255,170,200,1)"
-        d="M12 21s-6.7-4.6-9.5-8.2C.6 10.4 1.1 6.9 4.1 5.4
-           6.1 4.4 8.4 5.2 9.6 7c1.2-1.8 3.5-2.6 5.5-1.6
-           3 1.5 3.5 5 1.6 7.4C18.7 16.4 12 21 12 21z"/>
-    </svg>`;
-
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(), 1500);
-
-    const next = Math.random() * (max - min) + min;
-    setTimeout(spawnHeart, next);
-  }
-
-  // 最初は少し待つ
-  setTimeout(spawnHeart, 3000);
-}
+    /* ランダムきらきら（通常時） */
+    .twinkle{
+      position:fixed;
+      width:14px;height:14px;
+      pointer-events:none;
+      opacity:0;
+      animation: twinkle 0.7s ease-out forwards;
+      filter: drop-shadow(0 0 8px rgba(255,215,150,.6));
+      z-index:4;
+    }
+    @keyframes twinkle{
+      0%{opacity:0; transform:translate(-50%,-50%) scale(.6) rotate(0deg);}
+      25%{opacity:1;}
+      100%{opacity:0; transform:translate(-50%,-50%) scale(1.2) rotate(40deg);}
+    }
   </style>
 </head>
 
 <body>
-    <div class="stage">
-      <!-- 入口画像（あなたのリポジトリにあるファイル名に合わせてる） -->
-      <img class="img" src="01_cover.png" alt="気になる子の顔をタップして" />
+  <div class="stage" id="root">
+    <img class="img" src="01_cover.png" alt="気になる子の顔をタップして" />
 
-      <!-- ここから“顔タップ”の透明リンク（位置はだいたい。微調整は後でOK） -->
-      <a class="hotspot" href="lillilu.html" aria-label="リルリル"
-         style="left:41%; top:57%; width:18%; height:18%;"></a>
+    <a class="hotspot" href="lillilu.html" aria-label="リルリル"
+       style="left:41%; top:57%; width:18%; height:18%;"></a>
 
-      <a class="hotspot" href="espie.html" aria-label="エスピー"
-         style="left:18%; top:35%; width:22%; height:22%;"></a>
+    <a class="hotspot" href="espie.html" aria-label="エスピー"
+       style="left:18%; top:35%; width:22%; height:22%;"></a>
 
-      <a class="hotspot" href="gigi.html" aria-label="ジジ"
-         style="left:58%; top:18%; width:22%; height:22%;"></a>
+    <a class="hotspot" href="gigi.html" aria-label="ジジ"
+       style="left:58%; top:18%; width:22%; height:22%;"></a>
 
-      <a class="hotspot" href="bonbon.html" aria-label="ボンボン"
-         style="left:64%; top:40%; width:18%; height:18%;"></a>
+    <a class="hotspot" href="bonbon.html" aria-label="ボンボン"
+       style="left:64%; top:40%; width:18%; height:18%;"></a>
 
-      <a class="hotspot" href="rosie.html" aria-label="ロージー"
-         style="left:12%; top:55%; width:18%; height:18%;"></a>
+    <a class="hotspot" href="rosie.html" aria-label="ロージー"
+       style="left:12%; top:55%; width:18%; height:18%;"></a>
 
-      <a class="hotspot" href="finn.html" aria-label="フィン"
-         style="left:56%; top:64%; width:16%; height:16%;"></a>
+    <a class="hotspot" href="finn.html" aria-label="フィン"
+       style="left:56%; top:64%; width:16%; height:16%;"></a>
 
-      <a class="hotspot" href="levy.html" aria-label="レヴィ"
-         style="left:70%; top:56%; width:16%; height:16%;"></a>
-    </div>
+    <a class="hotspot" href="levy.html" aria-label="レヴィ"
+       style="left:70%; top:56%; width:16%; height:16%;"></a>
   </div>
 
   <script>
-    // ?debug=1 を付けた時だけ、赤く見えるようにする（位置合わせが超ラク）
+    // debug：URLの最後に ?debug=1 を付けると赤枠表示
     const params = new URLSearchParams(location.search);
     if (params.get('debug') === '1') document.getElementById('root').classList.add('debug');
-  </script>
-<script>
-  // タップした場所にキラッ✨を出す
-  document.querySelectorAll('.hotspot').forEach(a=>{
-    a.addEventListener('click', (e)=>{
-      const rect = a.getBoundingClientRect();
-      const x = (e.clientX || (rect.left + rect.width/2));
-      const y = (e.clientY || (rect.top  + rect.height/2));
 
-      const s = document.createElement('div');
-      s.className = 'spark';
-      s.style.left = x + 'px';
-      s.style.top  = y + 'px';
-      s.innerHTML = `
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-          <path fill="rgba(255,210,120,.95)" d="M12 0l2.2 7.2L21.5 9l-7.3 2.1L12 18l-2.2-6.9L2.5 9l7.3-1.8L12 0z"/>
-        </svg>`;
-      document.body.appendChild(s);
-      setTimeout(()=>s.remove(), 650);
-    }, {passive:true});
-  });
-</script>
-<script>
-(function(){
-  const min = 3000;  // 最短 3秒
-  const max = 6000;  // 最長 6秒
+    // タップした場所にキラッ✨
+    function bindTapSpark(selector){
+      document.querySelectorAll(selector).forEach(a=>{
+        a.addEventListener('click', (e)=>{
+          const rect = a.getBoundingClientRect();
+          const x = (e.clientX || (rect.left + rect.width/2));
+          const y = (e.clientY || (rect.top  + rect.height/2));
 
-  function spawnTwinkle(){
-    const t = document.createElement('div');
-    t.className = 'twinkle';
+          const s = document.createElement('div');
+          s.className = 'spark';
+          s.style.left = x + 'px';
+          s.style.top  = y + 'px';
+          s.innerHTML = `
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+              <path fill="rgba(255,210,120,.95)"
+                d="M12 0l2.2 7.2L21.5 9l-7.3 2.1L12 18l-2.2-6.9L2.5 9l7.3-1.8L12 0z"/>
+            </svg>`;
+          document.body.appendChild(s);
+          setTimeout(()=>s.remove(), 650);
+        }, {passive:true});
+      });
+    }
 
-    // 画面内ランダム位置（端は避ける）
-    const x = Math.random() * 80 + 10;
-    const y = Math.random() * 70 + 10;
-    t.style.left = x + 'vw';
-    t.style.top  = y + 'vh';
+    // 自動ハート（通常時）
+    function startAutoHeart(){
+      const min = 3500;  // 最短
+      const max = 6500;  // 最長
 
-    t.innerHTML = `
-      <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
-        <path fill="rgba(255,215,150,.95)"
-          d="M12 0l2.2 7.2L21.5 9l-7.3 2.1L12 18l-2.2-6.9L2.5 9l7.3-1.8L12 0z"/>
-      </svg>
-    `;
+      function spawnHeart(){
+        const h = document.createElement('div');
+        h.className = 'heart';
 
-    document.body.appendChild(t);
-    setTimeout(()=>t.remove(), 700);
+        const x = Math.random() * 84 + 8; // 8〜92vw
+        h.style.left = x + 'vw';
+        h.style.top  = '92vh'; // 下から出す（iPhoneでも見える）
+
+        h.innerHTML = `
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path fill="rgba(255,170,200,1)"
+              d="M12 21s-6.7-4.6-9.5-8.2C.6 10.4 1.1 6.9 4.1 5.4
+                 6.1 4.4 8.4 5.2 9.6 7c1.2-1.8 3.5-2.6 5.5-1.6
+                 3 1.5 3.5 5 1.6 7.4C18.7 16.4 12 21 12 21z"/>
+          </svg>`;
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(), 1600);
+
+        const next = Math.random() * (max - min) + min;
+        setTimeout(spawnHeart, next);
+      }
+
+      setTimeout(spawnHeart, 1200);
+    }
+
+    // 通常時きらきら（ランダム）
+    function startTwinkle(){
+      const min = 3000;
+      const max = 6000;
+
+      function spawnTwinkle(){
+        const t = document.createElement('div');
+        t.className = 'twinkle';
+
+        const x = Math.random() * 84 + 8;
+        const y = Math.random() * 70 + 10;
+        t.style.left = x + 'vw';
+        t.style.top  = y + 'vh';
+
+        t.innerHTML = `
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+            <path fill="rgba(255,215,150,.95)"
+              d="M12 0l2.2 7.2L21.5 9l-7.3 2.1L12 18l-2.2-6.9L2.5 9l7.3-1.8L12 0z"/>
+          </svg>`;
+        document.body.appendChild(t);
+        setTimeout(()=>t.remove(), 750);
+
+        const next = Math.random() * (max - min) + min;
+        setTimeout(spawnTwinkle, next);
+      }
+
+      setTimeout(spawnTwinkle, 1800);
+    }
 
     document.addEventListener('DOMContentLoaded', ()=>{
-  attachTapSpark('.hotspot, a.back'); // ← キラキラ（タップ）
-  startAutoHeart();                   // ← ハート（自動）
-});
-
-    const next = Math.random() * (max - min) + min;
-    setTimeout(spawnTwinkle, next);
-  }
-
-  // 初回は少し待ってから
-  setTimeout(spawnTwinkle, 2000);
-})();
-</script>
-
+      bindTapSpark('.hotspot');
+      startAutoHeart();
+      startTwinkle();
+    });
+  </script>
 </body>
 </html>
