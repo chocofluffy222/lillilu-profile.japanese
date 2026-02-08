@@ -77,21 +77,23 @@ body::before{
 /* ランダムきらきら */
 .twinkle{
   position:fixed;
-  width:16px;
-  height:16px;
+  width:20px;               /* ← 少しだけ大きく */
+  height:20px;
   pointer-events:none;
   opacity:0;
-  animation: twinkle .7s ease-out forwards;
+  animation: twinkle .75s ease-out forwards;
+  /* 白い芯＋金の外光 */
   filter:
-    drop-shadow(0 0 6px rgba(255,220,140,.9))
-    drop-shadow(0 0 14px rgba(255,200,120,.6));
+    drop-shadow(0 0 2px rgba(255,255,255,.95))
+    drop-shadow(0 0 10px rgba(255,210,120,.95))
+    drop-shadow(0 0 18px rgba(255,190,90,.75));
   z-index:0;
 }
 
 @keyframes twinkle{
-  0%   {opacity:0; transform:scale(.3) rotate(0deg);}
-  25%  {opacity:1; transform:scale(1.2) rotate(18deg);} /* ← ピーク */
-  100% {opacity:0; transform:scale(1.5) rotate(40deg);}
+  0%   {opacity:0; transform:scale(.35) rotate(0deg);}
+  22%  {opacity:1; transform:scale(1.25) rotate(18deg);} /* ← ピーク */
+  100% {opacity:0; transform:scale(1.55) rotate(42deg);}
 }
 
   </style>
