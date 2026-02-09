@@ -68,6 +68,12 @@
   object-fit:contain; /* ← 切らずに収める */
   display:block;
 }
+    /* PCでは画像を小さくしない */
+@media (min-width: 900px){
+  .img{
+    max-height:none;
+  }
+}
 
     .hotspot{
       position:absolute;
