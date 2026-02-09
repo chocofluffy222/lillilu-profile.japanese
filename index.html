@@ -193,7 +193,19 @@
   transform: translateY(1px);
   border-color: rgba(214, 178, 108, .95);
 }
+/* ===== PCだけ：ボタンを画像（stage）幅に揃えて分断感を消す ===== */
+@media (min-width: 900px){
+  .actions-wrap{
+    max-width:980px;
+    padding:0;          /* stageと左右を揃える */
+    margin-top:12px;
+  }
 
+  .btn-wide{
+    width:100%;         /* 画像の横幅に合わせる */
+    max-width:980px;    /* stageと同じ上限 */
+  }
+}
   </style>
 </head>
 
