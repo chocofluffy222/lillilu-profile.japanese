@@ -215,6 +215,13 @@
     max-width:980px;    /* stageと同じ上限 */
   }
 }
+    /* ===== FINAL override: ボタンを確実に短くする ===== */
+.btn-wide{
+  width: min(78vw, 320px) !important;  /* 画面の78%か320pxの小さい方 */
+  max-width: 320px !important;
+  margin: 0 auto !important;
+  box-sizing: border-box;
+}
   </style>
 </head>
 
