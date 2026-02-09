@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="ja">
 <head>
@@ -39,6 +40,7 @@
       padding-bottom:60px;
     }
 
+    /* 背景のふわ光（ハートがここなら、z-index都合で薄く見えることあり） */
     body::before{
       content:"";
       position:fixed;
@@ -81,44 +83,48 @@
       gap:14px;
     }
 
+    /* ボタン：横幅小さめ＆パステル */
     .btn-wide{
-  width:80%;                 /* ← 横幅を小さく */
-  max-width:420px;           /* ← 大きくなりすぎ防止 */
-  margin:0 auto;             /* ← 中央寄せ */
-  border-radius:16px;
-  padding:12px 14px;
-  border:0;
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  font-weight:600;
-  font-size:16px;
-  letter-spacing:.02em;
-  box-shadow:0 6px 14px rgba(180,160,200,.16);
-  user-select:none;
-  -webkit-tap-highlight-color: transparent;
-}
+      width:80%;
+      max-width:420px;
+      margin:0 auto;
+      border-radius:16px;
+      padding:12px 14px;
+      border:0;
+      text-decoration:none;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      font-weight:600;
+      font-size:16px;
+      letter-spacing:.02em;
+      box-shadow:0 6px 14px rgba(180,160,200,.16);
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
     .btn-wide:active{ transform: translateY(1px); }
 
+    /* 上：診断（主導線） */
     .quiz-gradient{
-  background: linear-gradient(90deg,
-    #f6dff0 0%,
-    #e9e4ff 55%,
-    #e3f1ff 100%
-  );
-  color:#6b5a6a; /* ← 白じゃない */
-}
+      background: linear-gradient(90deg,
+        #f6dff0 0%,
+        #e9e4ff 55%,
+        #e3f1ff 100%
+      );
+      color:#6b5a6a;
+    }
 
-   .ig-gradient{
-  background: linear-gradient(90deg,
-    #f3e1f2 0%,
-    #eadcf4 40%,
-    #f2e8dd 100%
-  );
-  color:#6b5a6a;
-}
+    /* 下：Instagram（控えめ） */
+    .ig-gradient{
+      background: linear-gradient(90deg,
+        #f3e1f2 0%,
+        #eadcf4 40%,
+        #f2e8dd 100%
+      );
+      color:#6b5a6a;
+    }
+
     .ico{
       width:20px;
       height:20px;
@@ -134,8 +140,9 @@
       color:rgba(120,100,110,.6);
     }
 
+    /* 小さい画面で大きくしない（ここは“縮む”方向にする） */
     @media (max-width:420px){
-      .btn-wide{ font-size:20px; padding:16px 16px; }
+      .btn-wide{ width:86%; font-size:15px; padding:11px 12px; }
     }
   </style>
 </head>
@@ -153,20 +160,20 @@
     <a class="hotspot" href="levy.html"    style="left:70%; top:56%; width:16%; height:16%;"></a>
   </div>
 
-  <!-- ボタン2つ：Instagram / リルリル診断 -->
+  <!-- 上：リルリル診断 / 下：Instagram -->
   <div class="actions-wrap">
- <!-- ★ここが診断リンク：実ファイル名に合わせて変えてOK -->
     <a class="btn-wide quiz-gradient" href="https://chocofluffy222.github.io/LilLilu-hiddencharm/">
       リルリル診断へ
     </a>
+
     <a class="btn-wide ig-gradient"
        href="https://www.instagram.com/lillilu_cuddlyclown?igsh=MWsxYjkyYzRkbm00dQ%3D%3D&utm_source=qr"
        target="_blank" rel="noopener">
       <span class="ico" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none">
-          <path d="M7.5 2.8h9A4.7 4.7 0 0 1 21.2 7.5v9A4.7 4.7 0 0 1 16.5 21.2h-9A4.7 4.7 0 0 1 2.8 16.5v-9A4.7 4.7 0 0 1 7.5 2.8Z" stroke="white" stroke-width="1.9"/>
-          <path d="M12 16.2a4.2 4.2 0 1 0 0-8.4 4.2 4.2 0 0 0 0 8.4Z" stroke="white" stroke-width="1.9"/>
-          <path d="M17.6 6.7h.01" stroke="white" stroke-width="3.2" stroke-linecap="round"/>
+          <path d="M7.5 2.8h9A4.7 4.7 0 0 1 21.2 7.5v9A4.7 4.7 0 0 1 16.5 21.2h-9A4.7 4.7 0 0 1 2.8 16.5v-9A4.7 4.7 0 0 1 7.5 2.8Z" stroke="#6b5a6a" stroke-width="1.9"/>
+          <path d="M12 16.2a4.2 4.2 0 1 0 0-8.4 4.2 4.2 0 0 0 0 8.4Z" stroke="#6b5a6a" stroke-width="1.9"/>
+          <path d="M17.6 6.7h.01" stroke="#6b5a6a" stroke-width="3.2" stroke-linecap="round"/>
         </svg>
       </span>
       Instagramを見る
