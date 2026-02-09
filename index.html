@@ -82,23 +82,24 @@
     }
 
     .btn-wide{
-      width:100%;
-      border-radius:16px;
-      padding:12px 14px;
-      border:0;
-      color:#fff;
-      text-decoration:none;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      font-weight:600;
-      font-size:16px;
-      letter-spacing:.02em;
-      box-shadow:0 8px 16px rgba(180,160,200,.18);
-      user-select:none;
-      -webkit-tap-highlight-color: transparent;
-    }
+  width:80%;                 /* ← 横幅を小さく */
+  max-width:420px;           /* ← 大きくなりすぎ防止 */
+  margin:0 auto;             /* ← 中央寄せ */
+  border-radius:16px;
+  padding:12px 14px;
+  border:0;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  font-weight:600;
+  font-size:16px;
+  letter-spacing:.02em;
+  box-shadow:0 6px 14px rgba(180,160,200,.16);
+  user-select:none;
+  -webkit-tap-highlight-color: transparent;
+}
     .btn-wide:active{ transform: translateY(1px); }
 
     .quiz-gradient{
