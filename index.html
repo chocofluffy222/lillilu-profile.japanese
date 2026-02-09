@@ -144,6 +144,36 @@
     @media (max-width:420px){
       .btn-wide{ width:86%; font-size:15px; padding:11px 12px; }
     }
+
+/* ===== ランダムハート ===== */
+.heart{
+  position:fixed;
+  width:32px;
+  height:32px;
+  pointer-events:none;
+  opacity:0;
+  transform:translate(-50%,-50%);
+  animation: heartPop 1.6s ease-out forwards;
+  filter:
+    drop-shadow(0 0 6px rgba(255,180,200,.95))
+    drop-shadow(0 0 18px rgba(255,140,180,.7));
+  z-index:3; /* 背景より上、UIより下 */
+}
+
+@keyframes heartPop{
+  0%   {opacity:0; transform:translate(-50%,-50%) scale(.45);}
+  20%  {opacity:1;}
+  100% {
+    opacity:0;
+    transform:
+      translate(
+        calc(-50% + var(--dx)),
+        calc(-50% + var(--dy))
+      )
+      scale(1.35);
+  }
+}
+
   </style>
 </head>
 
@@ -183,5 +213,46 @@
   <footer class="copyright">
     © 2026 chocofluffy
   </footer>
+
+<script>
+  /* ===== ランダムハート（中心付近から） ===== */
+  function startAutoHeart(){
+    const min = 1600;
+    const max = 3000;
+
+    function spawn(){
+      const h = document.createElement('div');
+      h.className = 'heart';
+
+      // 画面中央付近からランダム
+      const ox = (Math.random() * 240 - 120);
+      const oy = (Math.random() * 200 - 100);
+      h.style.left = `calc(50vw + ${ox}px)`;
+      h.style.top  = `calc(50vh + ${oy}px)`;
+
+      // 消える方向をランダムに
+      h.style.setProperty('--dx', (Math.random()*140 - 70) + 'px');
+      h.style.setProperty('--dy', (-(Math.random()*90 + 120)) + 'px');
+
+      h.innerHTML = `
+        <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true">
+          <path fill="rgba(255,170,200,1)"
+            d="M12 21s-6.7-4.6-9.5-8.2C.6 10.4 1.1 6.9 4.1 5.4
+               6.1 4.4 8.4 5.2 9.6 7c1.2-1.8 3.5-2.6 5.5-1.6
+               3 1.5 3.5 5 1.6 7.4C18.7 16.4 12 21 12 21z"/>
+        </svg>
+      `;
+
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(), 1700);
+
+      setTimeout(spawn, Math.random()*(max-min)+min);
+    }
+
+    setTimeout(spawn, 1200);
+  }
+
+  startAutoHeart();
+</script>
 </body>
 </html>
